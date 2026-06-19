@@ -1,0 +1,33 @@
+# Nombre visible en la pestaña Actions de GitHub
+name: Verificación de Landing Page
+
+# Ejercicio 2: Configurar ejecución automática al hacer Push a main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validar-estructura:
+    # Entorno virtual (máquina Linux limpia)
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso indispensable: Clonar el código del repositorio en la máquina virtual
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      # Ejercicio 3: Verificar existencia de index.html
+      - name: Verificar archivo index.html
+        run: test -f index.html
+
+      # Ejercicio 4: Verificar existencia de css/style.css
+      - name: Verificar archivo css/style.css
+        run: test -f css/style.css
+
+      # Ejercicio 4: Verificar existencia de js/script.js
+      - name: Verificar archivo js/script.js
+        run: test -f js/script.js
+
+      - name: Mensaje de éxito
+        run: echo "¡Estructura de archivos validada correctamente!"
